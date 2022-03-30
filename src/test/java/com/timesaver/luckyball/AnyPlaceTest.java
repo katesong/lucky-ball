@@ -122,7 +122,7 @@ public class AnyPlaceTest {
                                  return numberCount != null && numberCount >= entry.getValue();
                              });
 
-//                             System.out.println("number[" + numbers + "] target [" + target + "] is match ? " + isMatch);
+                             System.out.println("number[" + numbers + "] target [" + target + "] is match ? " + isMatch);
                              return isMatch;
                          })
                          .collect(Collectors.toList());

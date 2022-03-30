@@ -19,4 +19,14 @@ public class BallNumberGenerator {
                         .collect(Collectors.toList());
     }
 
+    public static List<String> getFromTenNumbersWithSeparator(int ballDigit, int maxNum, String separator) {
+        return IntStream.range(0, maxNum + 1)
+                        .mapToObj(num -> {
+                            String numStr = String.valueOf(num);
+                            String number = StringUtils.leftPad(numStr, ballDigit, "0");
+                            return StringUtils.join(number.split(""), separator);
+                        })
+                        .collect(Collectors.toList());
+    }
+
 }
