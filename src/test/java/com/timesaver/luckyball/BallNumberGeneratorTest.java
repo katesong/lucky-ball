@@ -11,16 +11,36 @@ import lombok.val;
 
 class BallNumberGeneratorTest {
 
+
     @Test
-    void test_4_digit() {
+    void test_getFromTenNumbers_4_digit() {
 
         val totalNumbers = BallNumberGenerator.getFromTenNumbers(4, 9999);
 
         Assertions.assertEquals(10000, totalNumbers.size());
 
+        Assertions.assertEquals("0000", totalNumbers.get(0));
+        Assertions.assertEquals("9999", totalNumbers.get(9999));
+
         System.out.println("all numbers: " + totalNumbers);
     }
 
+    @Test
+    void test_getFromTenNumbers_2_digit_without_zero() {
+
+        val totalNumbers = BallNumberGenerator.getFromTenNumber(2, 1, 58);
+
+        Assertions.assertEquals(58, totalNumbers.size());
+
+        Assertions.assertEquals("01", totalNumbers.get(0));
+        Assertions.assertEquals("58", totalNumbers.get(57));
+
+        System.out.println("all numbers: " + totalNumbers);
+    }
+
+    /**
+     *  四星 組選
+     */
     @Test
     void test_4_digit_nonDuplicate() {
 
@@ -77,6 +97,30 @@ class BallNumberGeneratorTest {
                       })
                       .map(nArray -> String.join("", nArray))
                       .collect(Collectors.toList());
+    }
+
+    @Test
+    void test_4_digit_RepeatNumberWithSeparator() {
+
+        val totalNumbers = BallNumberGenerator.getNumberWithSeparatorRepeat3Times(2, 1, 58, "-");
+
+        Assertions.assertEquals("01-01-01", totalNumbers.get(0));
+        Assertions.assertEquals("58-58-58", totalNumbers.get(totalNumbers.size() - 1));
+        Assertions.assertEquals(58 * 58 * 58, totalNumbers.size());
+
+        System.out.println("all numbers: " + totalNumbers.size());
+    }
+
+    @Test
+    void test_4_digit_RepeatNumberWithSeparator2() {
+
+        val totalNumbers = BallNumberGenerator.getNumberWithSeparatorRepeat3Times(2, 0, 6, "-");
+
+        Assertions.assertEquals("00-00-00", totalNumbers.get(0));
+        Assertions.assertEquals("06-06-06", totalNumbers.get(totalNumbers.size() - 1));
+        Assertions.assertEquals(7 * 7 * 7, totalNumbers.size());
+
+        System.out.println("all numbers: " + totalNumbers);
     }
 
 }
